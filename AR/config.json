@@ -1,0 +1,51 @@
+{
+    "language"        : "PYTHON",
+    "experiment-name" : "neon-hyperopt",
+    "polling-time"    : 1,
+    "resources" : {
+        "my-machine" : {
+            "scheduler"         : "local",
+            "max-concurrent"    : 1,
+            "max-finished-jobs" : 100
+        },
+        "cluster" : {
+            "scheduler"         : "PBS",
+            "max-concurrent"    : 3,
+            "max-finished-jobs" : 1000
+        }
+    },
+    "tasks": {
+        "hyperopt" : {
+            "type"       : "OBJECTIVE",
+            "likelihood" : "NOISELESS",
+            "main-file"  : "ar-mlp",
+            "resources"  : ["my-machine", "cluster"]
+        }
+    },
+    "variables": {
+        "lrate" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.001,
+            "max"  : 10
+        },
+        "lrule_coef" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.01,
+            "max"  : 1
+        },
+        "num_epochs" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 10,
+            "max"  : 2000
+        },
+        "batch_size" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 100,
+            "max"  : 2000
+        }
+    }
+}
