@@ -8,7 +8,8 @@ from neon.transforms import RectLin, Logistic, CrossEntropy
 from neon.experiments import FitPredictErrorExperiment
 from neon.params import val_init
 import os
-from AR.model import AR
+from model import AR
+
 import numpy as np
 
 
@@ -19,10 +20,22 @@ logger = logging.getLogger()
 def model_gen():
     layers = []
 
-    layers.append(DataLayer(name = 'd0', nout=35392))
-    # layers.append(DataLayer(name = 'd0', nout=3072))
+    layers.append(DataLayer(name = 'd0',
+                            is_local=True,
+                            nofm=2,
+                            ofmshape=[158, 224]))
+
+    # xx_size = 158
+    # yy_size = 224
+    # layers.append(DataLayer(name = 'd0', nout=35392))
 
 
+      # &datalayer !obj:layers.ImageDataLayer {
+      #   name: d0,
+      #   is_local: True,
+      #   nofm: 3,
+      #   ofmshape: [*cis, *cis],
+      # },
 
     layers.append(ConvLayer(
         name = 'layer1',
@@ -87,7 +100,7 @@ def model_gen():
             cost = CrossEntropy()
         )
     )
-    model = MLP(num_epochs=10, batch_size=128, layers=layers)
+    model = MLP(num_epochs=10, batch_size=200, layers=layers)
 
     return model
 
