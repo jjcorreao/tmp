@@ -8,7 +8,7 @@ from neon.transforms import RectLin, Logistic, CrossEntropy
 from neon.experiments import FitPredictErrorExperiment
 from neon.params import val_init
 import os
-from model import AR
+from AR.model import AR
 
 import numpy as np
 
@@ -105,12 +105,13 @@ def model_gen():
     return model
 
 
-basepath = "/Users/DOE6903584/NERSC/mantissa-new/AR/data"
+basepath = "/project/projectdirs/nervana/berghain/data"
+repo_path = os.path.join(basepath, "/results")
 fland = os.path.join(basepath, "landmask_imgs.pkl")
 far = os.path.join(basepath, "atmosphericriver_TMQ.h5")
 
 dataset = AR(fland=fland, far=far)
 
-experiment = FitPredictErrorExperiment(model=model_gen(), backend=gen_backend(),dataset=dataset)
+experiment = FitPredictErrorExperiment(model=model_gen(), backend=gen_backend(),dataset=dataset,repo_path=repo_path)
 
 experiment.run()
