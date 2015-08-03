@@ -3,7 +3,7 @@ __author__ = 'jcorrea'
 import numpy as np
 import h5py
 from matplotlib import pyplot as plt
-from sklearn.preprocessing import normalize
+# from sklearn.preprocessing import normalize
 import pickle
 import logging
 import os
