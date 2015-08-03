@@ -100,7 +100,7 @@ def model_gen():
             cost = CrossEntropy()
         )
     )
-    model = MLP(num_epochs=10, batch_size=200, layers=layers)
+    model = MLP(num_epochs=2, batch_size=200, layers=layers)
 
     return model
 
@@ -113,4 +113,4 @@ dataset = AR(fland=fland, far=far)
 
 experiment = FitPredictErrorExperiment(model=model_gen(), backend=gen_backend(),dataset=dataset)
 
-experiment.run()
+experiment_run = experiment.run()
