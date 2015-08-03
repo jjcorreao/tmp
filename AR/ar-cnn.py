@@ -9,6 +9,7 @@ from neon.experiments import FitPredictErrorExperiment
 from neon.params import val_init
 import os
 from AR.model import AR
+# from model import AR
 
 import numpy as np
 
@@ -27,15 +28,6 @@ def model_gen():
 
     # xx_size = 158
     # yy_size = 224
-    # layers.append(DataLayer(name = 'd0', nout=35392))
-
-
-      # &datalayer !obj:layers.ImageDataLayer {
-      #   name: d0,
-      #   is_local: True,
-      #   nofm: 3,
-      #   ofmshape: [*cis, *cis],
-      # },
 
     layers.append(ConvLayer(
         name = 'layer1',
@@ -46,7 +38,6 @@ def model_gen():
                 'momentum_params': {'coef': 0.9, 'type': 'constant'}},
                 'type': 'gradient_descent_momentum'}
     ))
-
 
     layers.append(PoolingLayer(
         name='layer2',
@@ -106,6 +97,7 @@ def model_gen():
 
 
 basepath = "/project/projectdirs/nervana/berghain/data"
+# basepath = "/Users/DOE6903584/NERSC/mantissa-new/AR/data"
 repo_path = os.path.join(basepath, "/results")
 fland = os.path.join(basepath, "landmask_imgs.pkl")
 far = os.path.join(basepath, "atmosphericriver_TMQ.h5")
