@@ -10,7 +10,7 @@
         },
         "cluster" : {
             "scheduler"         : "PBS",
-            "scheduler-args"    : "-q regular -l walltime=01:30:00 -l mppwidth=24",
+            "scheduler-args"    : "-q premiumg -l walltime=01:30:00 -l mppwidth=24",
             "max-concurrent"    : 24,
             "max-finished-jobs" : 200
         }
@@ -27,13 +27,13 @@
         "lrate" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : 0.00001,
+            "min"  : 0.0001,
             "max"  : 10
         },
         "lrule_coef" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : 0.0001,
+            "min"  : 0.001,
             "max"  : 1
         },
         "num_epochs" : {

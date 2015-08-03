@@ -39,6 +39,8 @@ def model_gen():
                 'type': 'gradient_descent_momentum'}
     ))
 
+
+
     layers.append(PoolingLayer(
         name='layer2',
         op = 'max',
