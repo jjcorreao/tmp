@@ -10,8 +10,9 @@
         },
         "cluster" : {
             "scheduler"         : "PBS",
-            "max-concurrent"    : 3,
-            "max-finished-jobs" : 1000
+            "scheduler-args"    : "-q regular -l walltime=01:30:00 -l mppwidth=24",
+            "max-concurrent"    : 24,
+            "max-finished-jobs" : 200
         }
     },
     "tasks": {
@@ -26,20 +27,20 @@
         "lrate" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : 0.001,
+            "min"  : 0.00001,
             "max"  : 10
         },
         "lrule_coef" : {
             "type" : "FLOAT",
             "size" : 1,
-            "min"  : 0.01,
+            "min"  : 0.0001,
             "max"  : 1
         },
         "num_epochs" : {
             "type" : "INT",
             "size" : 1,
-            "min"  : 10,
-            "max"  : 2000
+            "min"  : 1,
+            "max"  : 50
         },
         "batch_size" : {
             "type" : "INT",
