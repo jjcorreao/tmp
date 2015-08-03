@@ -55,17 +55,17 @@ class AR(Dataset):
 
         # TR/TE sizes for AR/nAR
 
-        # tr_size_ar = 2000
-        # tr_size_nar = 2000
-
-        # te_size_ar = 468
-        # te_size_nar = 1077
-
-        tr_size_ar = 100
-        tr_size_nar = 100
+        tr_size_ar = 2000
+        tr_size_nar = 2000
         #
-        te_size_ar = 100
-        te_size_nar = 100
+        te_size_ar = 468
+        te_size_nar = 1077
+
+        # tr_size_ar = 100
+        # tr_size_nar = 100
+        #
+        # te_size_ar = 100
+        # te_size_nar = 100
 
         # l_ar = np.ones(tr_size_ar + te_size_ar)
         # l_nar = np.zeros(tr_size_nar + te_size_nar)
