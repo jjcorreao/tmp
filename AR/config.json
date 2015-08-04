@@ -12,28 +12,112 @@
             "scheduler"         : "PBS",
             "scheduler-args"    : "-q regular -l walltime=01:30:00 -l mppwidth=24",
             "max-concurrent"    : 24,
-            "max-finished-jobs" : 200
+            "max-finished-jobs" : 1000
         }
     },
     "tasks": {
         "hyperopt" : {
             "type"       : "OBJECTIVE",
             "likelihood" : "NOISELESS",
-            "main-file"  : "ar-mlp",
+            "main-file"  : "ar-cnn_hyperopt",
             "resources"  : ["my-machine", "cluster"]
         }
     },
     "variables": {
-        "lrate" : {
-            "type" : "FLOAT",
+        "nofm_layer1" : {
+            "type" : "INT",
             "size" : 1,
-            "min"  : 0.00001,
-            "max"  : 10
+            "min"  : 2,
+            "max"  : 64
         },
-        "lrule_coef" : {
+        "fshape_layer1" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 2,
+            "max"  : 100
+        },
+        "learning_rate_layer1" : {
             "type" : "FLOAT",
             "size" : 1,
             "min"  : 0.0001,
+            "max"  : 0.1
+        },
+        "coef_layer1" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.001,
+            "max"  : 1
+        },
+        "fshape_layer2" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 1,
+            "max"  : 10
+        },
+        "stride_layer2" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 1,
+            "max"  : 5
+        },
+        "nofm_layer3" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 10,
+            "max"  : 50
+        },
+        "fshape_layer3" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 2,
+            "max"  : 64
+        },
+        "learning_rate_layer3" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.0001,
+            "max"  : 0.1
+        },
+        "coef_layer3" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.001,
+            "max"  : 1
+        },
+        "fshape_layer4" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 2,
+            "max"  : 100
+        },
+        "stride_layer4" : {
+            "type" : "INT",
+            "size" : 1,
+            "min"  : 1,
+            "max"  : 5
+        },
+        "learning_rate_layer5" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.0001,
+            "max"  : 0.1
+        },
+        "coef_layer5" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.001,
+            "max"  : 1
+        },
+        "learning_rate_output" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.0001,
+            "max"  : 0.1
+        },
+        "coef_output" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.001,
             "max"  : 1
         },
         "num_epochs" : {
@@ -45,8 +129,8 @@
         "batch_size" : {
             "type" : "INT",
             "size" : 1,
-            "min"  : 100,
-            "max"  : 2000
+            "min"  : 1,
+            "max"  : 300
         }
     }
 }

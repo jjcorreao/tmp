@@ -57,15 +57,15 @@ class AR(Dataset):
 
         # tr_size_ar = 2000
         # tr_size_nar = 2000
-
+        #
         # te_size_ar = 468
         # te_size_nar = 1077
-
-        tr_size_ar = 100
-        tr_size_nar = 100
         #
-        te_size_ar = 100
-        te_size_nar = 100
+        tr_size_ar = 500
+        tr_size_nar = 500
+
+        te_size_ar = 500
+        te_size_nar = 500
 
         # l_ar = np.ones(tr_size_ar + te_size_ar)
         # l_nar = np.zeros(tr_size_nar + te_size_nar)
@@ -114,17 +114,32 @@ class AR(Dataset):
         dnar_te = dnar.squeeze()[-te_size_nar:]
 
         # Correct!
-        Ftr_ar = np.asarray([tr_ar[i].flatten() for i in range(len(tr_ar))])
-        Ftr_arI = np.asarray([dar_tr[i].flatten() for i in range(len(dar_tr))])
+        Ftr_ar = np.asarray([normalize(tr_ar[i]).flatten() for i in range(len(tr_ar))])
+        Ftr_arI = np.asarray([normalize(dar_tr[i]).flatten() for i in range(len(dar_tr))])
 
-        Ftr_nar = np.asarray([tr_nar[i].flatten() for i in range(len(tr_nar))])
-        Ftr_narI = np.asarray([dnar_tr[i].flatten() for i in range(len(dnar_tr))])
+        Ftr_nar = np.asarray([normalize(tr_nar[i]).flatten() for i in range(len(tr_nar))])
+        Ftr_narI = np.asarray([normalize(dnar_tr[i]).flatten() for i in range(len(dnar_tr))])
 
-        Fte_ar = np.asarray([te_ar[i].flatten() for i in range(len(te_ar))])
-        Fte_arI = np.asarray([dar_te[i].flatten() for i in range(len(dar_te))])
+        Fte_ar = np.asarray([normalize(te_ar[i]).flatten() for i in range(len(te_ar))])
+        Fte_arI = np.asarray([normalize(dar_te[i]).flatten() for i in range(len(dar_te))])
 
-        Fte_nar = np.asarray([te_nar[i].flatten() for i in range(len(te_nar))])
-        Fte_narI = np.asarray([dnar_te[i].flatten() for i in range(len(dnar_te))])
+        Fte_nar = np.asarray([normalize(te_nar[i]).flatten() for i in range(len(te_nar))])
+        Fte_narI = np.asarray([normalize(dnar_te[i]).flatten() for i in range(len(dnar_te))])
+
+        # # Correct!
+        # Ftr_ar = np.asarray([tr_ar[i].flatten() for i in range(len(tr_ar))])
+        # Ftr_arI = np.asarray([dar_tr[i].flatten() for i in range(len(dar_tr))])
+        #
+        # Ftr_nar = np.asarray([tr_nar[i].flatten() for i in range(len(tr_nar))])
+        # Ftr_narI = np.asarray([dnar_tr[i].flatten() for i in range(len(dnar_tr))])
+        #
+        # Fte_ar = np.asarray([te_ar[i].flatten() for i in range(len(te_ar))])
+        # Fte_arI = np.asarray([dar_te[i].flatten() for i in range(len(dar_te))])
+        #
+        # Fte_nar = np.asarray([te_nar[i].flatten() for i in range(len(te_nar))])
+        # Fte_narI = np.asarray([dnar_te[i].flatten() for i in range(len(dnar_te))])
+
+
 
         # ja=[oe[i].flatten() for i in range(len(oe))]
 
@@ -169,20 +184,41 @@ class AR(Dataset):
         self.labels_train = l_tr
         self.labels_test = l_te
 
+        s = range(len(self.data_train))
+        d = range(len(self.data_test))
+        np.random.shuffle(s)
+        np.random.shuffle(d)
+
+        self.s = s
+        self.d = d
+
         # self.__inputs__ = {'data': d_tr, 'labels': l_tr[self.s]}
         # self.__targets__ = {'data': d_te, 'labels': l_te[self.d]}
 
     def load(self, backend=None, experiment=None):
         # Dataset.inputs
 
-        # self.backend = None
-        self.inputs = {'train': self.data_train,
-                       'test': self.data_test,
-                       'validation': self.data_test[:5]}
+        s = range(len(self.data_train))
+        d = range(len(self.data_test))
+        np.random.shuffle(s)
+        np.random.shuffle(d)
 
-        self.targets = {'train': self.labels_train,
-                        'test': self.labels_test,
-                        'validation': self.labels_test[:5]}
+        # self.backend = None
+        # self.inputs = {'train': self.data_train[s],
+        #                'test': self.data_test[d],
+        #                'validation': self.data_test[:5]}
+        #
+        # self.targets = {'train': self.labels_train[s],
+        #                 'test': self.labels_test[d],
+        #                 'validation': self.labels_test[:5]}
+
+        self.inputs = {'train': self.data_train[s],
+                       'test': self.data_test[d],
+                       'validation': None}
+
+        self.targets = {'train': self.labels_train[s],
+                        'test': self.labels_test[d],
+                        'validation': None}
 
         # self.original_inputs = self.inputs
         # self.original_targets = self.targets
