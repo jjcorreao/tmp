@@ -27,20 +27,29 @@ def model_gen(params):
 
     nofm_layer1=params['nofm_layer1'][0]
     fshape_layer1=params['fshape_layer1'][0]
-    learning_rate_layer1=params['learning_rate_layer1'][0]
-    coef_layer1=params['coef_layer1'][0]
+
+    # FLOAT
+    learning_rate_layer1=np.float32(params['learning_rate_layer1'][0])
+    coef_layer1=np.float32(params['coef_layer1'][0])
+
     fshape_layer2=params['fshape_layer2'][0]
     stride_layer2=params['stride_layer2'][0]
     nofm_layer3=params['nofm_layer3'][0]
     fshape_layer3=params['fshape_layer3'][0]
-    learning_rate_layer3=params['learning_rate_layer3'][0]
-    coef_layer3=params['coef_layer3'][0]
+
+    # FLOAT
+    learning_rate_layer3=np.float32(params['learning_rate_layer3'][0])
+    coef_layer3=np.float32(params['coef_layer3'][0])
+
     fshape_layer4=params['fshape_layer4'][0]
     stride_layer4=params['stride_layer4'][0]
-    learning_rate_layer5=params['learning_rate_layer5'][0]
-    coef_layer5=params['coef_layer5'][0]
-    learning_rate_output=params['learning_rate_output'][0]
-    coef_output=params['coef_output'][0]
+
+    # FLOAT
+    learning_rate_layer5=np.float32(params['learning_rate_layer5'][0])
+    coef_layer5=np.float32(params['coef_layer5'][0])
+    learning_rate_output=np.float32(params['learning_rate_output'][0])
+    coef_output=np.float32(params['coef_output'][0])
+
     num_epochs=params['num_epochs'][0]
     batch_size=params['batch_size'][0]
 
