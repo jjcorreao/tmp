@@ -44,7 +44,7 @@ def model_gen(nofm_layer1, fshape_layer1, learning_rate_layer1, coef_layer1,
     layers.append(ConvLayer(
         name = 'layer1',
         nofm = nofm_layer1,
-        fshape = [fshape_layer1,fshape_layer1],
+        fshape = [fshape_layer1[0],fshape_layer1[0]],
         weight_init = val_init.UniformValGen(low=-0.1,high=0.1),
         lrule_init={'lr_params': {'learning_rate': learning_rate_layer1,
                 'momentum_params': {'coef': coef_layer1, 'type': 'constant'}},
@@ -55,14 +55,14 @@ def model_gen(nofm_layer1, fshape_layer1, learning_rate_layer1, coef_layer1,
     layers.append(PoolingLayer(
         name='layer2',
         op = 'max',
-        fshape = [fshape_layer2,fshape_layer2],
+        fshape = [fshape_layer2[0],fshape_layer2[0]],
         stride = stride_layer2
     ))
 
     layers.append(ConvLayer(
         name = 'layer3',
         nofm = nofm_layer3,
-        fshape = [fshape_layer3,fshape_layer3],
+        fshape = [fshape_layer3[0],fshape_layer3[0]],
         weight_init = val_init.UniformValGen(low=-0.1,high=0.1),
         lrule_init={'lr_params': {'learning_rate': learning_rate_layer3,
                 'momentum_params': {'coef': coef_layer3, 'type': 'constant'}},
@@ -72,7 +72,7 @@ def model_gen(nofm_layer1, fshape_layer1, learning_rate_layer1, coef_layer1,
     layers.append(PoolingLayer(
         name='layer4',
         op = 'max',
-        fshape = [fshape_layer4,fshape_layer4],
+        fshape = [fshape_layer4[0],fshape_layer4[0]],
         stride = stride_layer4
     ))
 
