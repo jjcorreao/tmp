@@ -126,15 +126,15 @@ def hyperopt(nofm_layer1, fshape_layer1, learning_rate_layer1, coef_layer1,
     fland = os.path.join(basepath, "landmask_imgs.pkl")
     far = os.path.join(basepath, "atmosphericriver_TMQ.h5")
 
-    dataset = AR(fland=fland, far=far, save_dir=repo_path, repo_path=repo_path)
+    # dataset = AR(fland=fland, far=far, save_dir=repo_path, repo_path=repo_path)
+    dataset = AR(fland=fland, far=far, save_dir=repo_path)
 
     # metrics = {'train':[LogLossMean(), MisclassRate(), MSE()], 'validation':[LogLossMean(), MisclassRate(), MSE()], 'test':[]}
     experiment = FitPredictErrorExperiment(model=model_gen(nofm_layer1, fshape_layer1, learning_rate_layer1, coef_layer1,
                                                            fshape_layer2, stride_layer2, nofm_layer3, fshape_layer3,
                                                            learning_rate_layer3, coef_layer3, fshape_layer4, stride_layer4,
                                                             learning_rate_layer5, coef_layer5, learning_rate_output, coef_output,
-                                                           num_epochs, batch_size), backend=gen_backend(),dataset=dataset,
-                                                            predictions = ['train', 'test'])
+                                                           num_epochs, batch_size), backend=gen_backend(),dataset=dataset)
 
     metrics = experiment.run()
 
